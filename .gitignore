@@ -1,10 +1,21 @@
-# For projects using Nanoc (http://nanoc.ws/)
+.DS_Store
+node_modules/
+/dist/
 
-# Default location for output (needs to match output_dir's value found in nanoc.yaml)
-output/
+# local env files
+.env.local
+.env.*.local
 
-# Temporary file directory
-tmp/nanoc/
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-# Crash Log
-crash.log
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*
