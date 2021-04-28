@@ -1,6 +1,7 @@
 <template>
   <div>
     <video ref="video" width="500" height="500" autoplay></video>
+    <video ref="videoPreview" width="200" height="200" autoplay></video> 
     <div>
       <button @click="onStartRecording()">start</button>
       <button @click="stopRecording()">stop</button>
@@ -59,6 +60,7 @@ export default {
 
       navigator.mediaDevices.getUserMedia({
         video: true,
+        audio: true,
       })
       .then(stream => {
         this.preview.srcObject = stream
@@ -88,6 +90,7 @@ export default {
 
       mediaRecorder.addEventListener('stop', () => {
         this.downloadLink = URL.createObjectURL(new Blob(recordedChunks));
+        this.videoReproduce.src = this.downloadLink;
       });
 
       mediaRecorder.start(1000);
@@ -95,12 +98,21 @@ export default {
     },
     stopRecording() {
       this.shouldStop = true;
+    },
+    playVideoFromBlob(){
+      // const mediaSrc = new MediaSource();
+      // const mediaSrcUrl = url.createObjectURL(mediaSrc);
+      // const video = this.videoReproduce;
+      // video.srcObject = mediaSrcUrl;
     }
   },
   computed: {
     preview() {
       return this.$refs.video;
     },
+    videoReproduce() {
+      return this.$refs.videoPreview;
+    }
   },
   watch: {
     selectedValue(newValue) {
